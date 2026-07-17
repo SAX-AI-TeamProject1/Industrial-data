@@ -1,0 +1,17 @@
+"한국 산업용 로봇 투입현황 — 연도별 (IFR 공표치, 검증된 수치만)",,,,,
+'투입'은 ① 연간 설치대수(그해 새로 설치) ② 가동대수(현재 공장에서 운용 중인 누적 스톡) ③ 로봇밀도(종업원 1만 명당 가동대수) 세 지표로 정리,,,,,
+,,,,,
+구분,기준연도,값,단위,비고,출처
+연간 설치대수,"2,016","41,373",대,"역대 최고치(정점). 이후 2020년까지 감소, 이후 완만 회복",IFR World Robotics 2023 요약본(원문 대조 완료): https://ifr.org/img/worldrobotics/Executive_Summary_WR_Industrial_Robots_2023.pdf
+연간 설치대수,"2,018","37,807",대,전년 대비 -5%,IFR 보도자료 'Korea hits new record'(2019.12): https://ifr.org/ifr-press-releases/news/korea-hits-new-record
+연간 설치대수,"2,022","31,716",대,"전년 대비 +1%. 2019년 이후 약 31,000대 안팎 횡보",IFR World Robotics 2023 요약본(원문 대조 완료): https://ifr.org/img/worldrobotics/Executive_Summary_WR_Industrial_Robots_2023.pdf
+연간 설치대수,"2,023","31,444",대,전년 대비 -1%,IFR World Robotics 2024 보도(The Robot Report): https://www.therobotreport.com/ifr-4-million-robots-operating-globally-world-robotics-report/
+연간 설치대수,"2,024","30,596",대,전년 대비 -3%. 세계 4위 시장(중국·일본·미국 다음),IFR World Robotics 2025 요약본(원문 대조 완료): https://ifr.org/img/worldrobotics/Executive_Summary_WR_2025_Industrial_Robots.pdf
+가동대수(운용 스톡),"2,018","300,000",대(약),사상 최초 30만 대 돌파(+10%). 2013~2018년 5년 만에 2배,IFR 보도자료 'Korea hits new record'(2019.12): https://ifr.org/ifr-press-releases/news/korea-hits-new-record
+가동대수(운용 스톡),"2,020","343,000",대(약),IFR 2021.10 발표(WR2021) 기준,IFR 한국어 보도자료 모음(뉴스와이어): https://www.newswire.co.kr/?md=A10&act=article&no=31835
+로봇밀도,"2,018",774,대/종업원 1만 명,세계 2위(싱가포르 다음),IFR 보도자료 'Korea hits new record'(2019.12): https://ifr.org/ifr-press-releases/news/korea-hits-new-record
+로봇밀도,"2,021","1,000",대/종업원 1만 명,"세계 최초 1,000대 돌파, 세계 1위",IFR 로봇밀도 보도자료(2024.11): https://ifr.org/downloads/press2018/KOR-2024-NOV-20-IFR-press_release_Robot_Density_2024_1.pdf
+로봇밀도,"2,023","1,012",대/종업원 1만 명,"세계 1위, 세계 평균(162대)의 6배 이상",IFR 로봇밀도 보도자료(2024.11): https://ifr.org/downloads/press2018/KOR-2024-NOV-20-IFR-press_release_Robot_Density_2024_1.pdf
+로봇밀도,"2,024","1,220",대/종업원 1만 명,세계 1위 유지(WR2025). 2019년 이후 연평균 +7%,로봇신문(WR2025 로봇밀도): https://www.irobotnews.com/news/articleView.html?idxno=45775
+,,,,,
+"※ 빈 연도(2017, 2019~2021 설치대수 등)는 공개 요약자료에서 수치가 확인되지 않아 제외 — 추정치를 넣지 않음. 완전한 연도별 시계열은 IFR World Robotics 유료 보고서(ifr.org/worldrobotics)에 수록.",,,,,
