@@ -1,15 +1,22 @@
+# Last updated: 2026-07-19
 """산업재해 데이터 시각화: 로봇밀도, 사고재해자/사망자, 재해정도."""
 
+import platform
 from pathlib import Path
 
 import pandas as pd
 import matplotlib.pyplot as plt
 
-plt.rcParams["font.family"] = "Malgun Gothic"
+if platform.system() == "Darwin":
+    plt.rcParams["font.family"] = "AppleGothic"
+elif platform.system() == "Windows":
+    plt.rcParams["font.family"] = "Malgun Gothic"
+else:
+    plt.rcParams["font.family"] = "NanumGothic"
 plt.rcParams["axes.unicode_minus"] = False
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-CSV_DIR = BASE_DIR / "csv"
+CSV_DIR = BASE_DIR / "asset"
 OUT_DIR = BASE_DIR / "visualizations"
 OUT_DIR.mkdir(exist_ok=True)
 
@@ -34,6 +41,9 @@ def plot_robot_density():
     plt.close(fig)
 
 
+KEEP_INDUSTRIES = ["제조업", "건설업", "운수·창고·통신업"]
+
+
 def load_industry_matrix(paths, drop_columns=("합계",)):
     """여러 연도 CSV(대업종 x 항목)를 같은 항목끼리 합산."""
     matrix = None
@@ -42,7 +52,7 @@ def load_industry_matrix(paths, drop_columns=("합계",)):
         df = df.set_index(df.columns[0])
         df.index.name = "대업종"
         df.columns = [c[1] for c in df.columns]
-        df = df.drop(index=["합계", "기타의사업"])
+        df = df.loc[[i for i in KEEP_INDUSTRIES if i in df.index]]
         df = df.drop(columns=[c for c in drop_columns if c in df.columns])
         matrix = df if matrix is None else matrix.add(df, fill_value=0)
 
@@ -86,7 +96,7 @@ def main():
     )
     plot_heatmap(
         victims,
-        "대업종별 사고재해자 발생형태 (2023~2025 합계, 기타의사업 제외)",
+        "대업종별 사고재해자 발생형태 (2023~2025 합계, 제조·건설·운수창고통신업)",
         OUT_DIR / "02_사고재해자_업종별_발생형태.png",
     )
 
@@ -99,7 +109,7 @@ def main():
     )
     plot_heatmap(
         deaths,
-        "대업종별 사고사망자 발생형태 (2023~2025 합계, 기타의사업 제외)",
+        "대업종별 사고사망자 발생형태 (2023~2025 합계, 제조·건설·운수창고통신업)",
         OUT_DIR / "03_사고사망자_업종별_발생형태.png",
     )
 
@@ -114,7 +124,7 @@ def main():
     )
     plot_heatmap(
         severity,
-        "대업종별 재해정도 (2022~2025 합계, 기타의사업 제외)",
+        "대업종별 재해정도 (2022~2025 합계, 제조·건설·운수창고통신업)",
         OUT_DIR / "04_사고재해정도_업종별.png",
     )
 
