@@ -62,25 +62,27 @@ def load_industry_matrix(paths, drop_columns=("합계",)):
 
 def plot_heatmap(matrix, title, outfile, cbar_label="건수"):
     fig, ax = plt.subplots(
-        figsize=(1.1 * len(matrix.columns) + 3, 0.55 * len(matrix.index) + 2)
+        figsize=(0.9 * len(matrix.columns) + 2.5, 0.45 * len(matrix.index) + 1.8)
     )
     im = ax.imshow(matrix.values, cmap="OrRd", aspect="auto")
     ax.set_xticks(range(len(matrix.columns)))
-    ax.set_xticklabels(matrix.columns, rotation=45, ha="right")
+    ax.set_xticklabels(matrix.columns, rotation=45, ha="right", fontsize=11)
     ax.set_yticks(range(len(matrix.index)))
-    ax.set_yticklabels(matrix.index)
+    ax.set_yticklabels(matrix.index, fontsize=11)
 
     vmax = matrix.values.max()
     for i in range(matrix.shape[0]):
         for j in range(matrix.shape[1]):
             val = matrix.values[i, j]
             color = "white" if val > vmax * 0.6 else "black"
-            ax.text(j, i, f"{val:,.0f}", ha="center", va="center", fontsize=7, color=color)
+            ax.text(j, i, f"{val:,.0f}", ha="center", va="center", fontsize=10, color=color)
 
-    fig.colorbar(im, ax=ax, label=cbar_label)
-    ax.set_title(title)
+    cbar = fig.colorbar(im, ax=ax, label=cbar_label)
+    cbar.ax.tick_params(labelsize=10)
+    cbar.set_label(cbar_label, fontsize=11)
+    ax.set_title(title, fontsize=13)
     fig.tight_layout()
-    fig.savefig(outfile, dpi=150)
+    fig.savefig(outfile, dpi=300)
     plt.close(fig)
 
 
@@ -124,7 +126,7 @@ def main():
     )
     plot_heatmap(
         severity,
-        "대업종별 재해정도 (2022~2025 합계, 제조·건설·운수창고통신업)",
+        "대업종별 재해정도 (2023~2025 합계, 제조·건설·운수창고통신업)",
         OUT_DIR / "04_사고재해정도_업종별.png",
     )
 
