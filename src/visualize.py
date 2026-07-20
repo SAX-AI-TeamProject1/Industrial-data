@@ -1,5 +1,5 @@
 # Last updated: 2026-07-19
-"""산업재해 데이터 시각화: 로봇밀도, 사고재해자/사망자, 재해정도."""
+"""산업재해 데이터 시각화: 로봇밀도, 사고재해자/사망자, 재해정도.""" 
 
 import platform
 from pathlib import Path
