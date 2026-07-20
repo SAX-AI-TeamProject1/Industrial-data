@@ -2,6 +2,8 @@
 ### 로봇밀도가 산업재해를 크게 예방하지 못하고 있고 데이터 비교시 뚜렷하지 않습니다
 ### 로봇에 작업자 수신호 인식과 예측기능을 넣고 사고감소 기대효과를 보면 좋을 것 같습니다 
 ### 고로 실제로 사고감소 효과를 보거나 기대하려면 이런 프로젝트가 꼭 필요해 보입니다 ** 수기작성입니다 ㅎㅎ **
+### 
+### 
 
 import os
 import pandas as pd
@@ -46,7 +48,7 @@ def setup_font():
             break
     else:
         print("경고: 한글 폰트를 찾지 못했습니다. 그래프의 한글이 깨질 수 있습니다.")
-    plt.rcParams['axes.unicode_minus'] = False
+    plt.rcParams['axes.unicode_minus'] = False # 가끔 한글쓸때 - 가 깨지는 경우를 방지해줍니다
     plt.rcParams['figure.dpi'] = 140
 
 
@@ -249,42 +251,105 @@ def make_chart3_industry_hazard_types(data):
     types = ['부딪힘', '끼임', '깔림.뒤집힘', '사업장내교통사고']
     type_labels = ['부딪힘', '끼임', '깔림·뒤집힘', '사업장내교통사고']
 
+    # 표시할 업종만 지정
+    target_industries = [
+        '제조업',
+        '건설업',
+        '운수·창고·통신업'
+    ]
+
     dfs = [data['y23'], data['y24'], data['y25']]
+
     agg = dfs[0][['대업종'] + types].set_index('대업종').copy()
+
     for d in dfs[1:]:
-        agg = agg.add(d[['대업종'] + types].set_index('대업종'), fill_value=0)
-    agg = agg.drop(index='합계')
+        agg = agg.add(
+            d[['대업종'] + types].set_index('대업종'),
+            fill_value=0
+        )
+
+    # 제조업, 건설업, 운수·창고·통신업만 남김
+    agg = agg.loc[
+        agg.index.intersection(target_industries)
+    ]
+
     agg['total'] = agg.sum(axis=1)
     agg = agg.sort_values('total', ascending=True)
 
     colors = ['#4C72B0', '#DD8452', '#55A868', '#C44E52']
 
-    fig, ax = plt.subplots(figsize=(10, 6.5))
+    fig, ax = plt.subplots(figsize=(10, 5))
+
     left = np.zeros(len(agg))
+
     for t, lbl, c in zip(types, type_labels, colors):
-        ax.barh(agg.index, agg[t], left=left, color=c, label=lbl)
+        ax.barh(
+            agg.index,
+            agg[t],
+            left=left,
+            color=c,
+            label=lbl
+        )
         left += agg[t].values
 
     for i, (idx, row) in enumerate(agg.iterrows()):
-        ax.text(row['total'] + 200, i, f"{int(row['total']):,}명", va='center', fontsize=9)
+        ax.text(
+            row['total'] + 200,
+            i,
+            f"{int(row['total']):,}명",
+            va='center',
+            fontsize=9
+        )
 
-    ax.set_xlabel('사고재해자수 (명, 2023~2025년 합산)', fontsize=11)
-    ax.set_title('대업종별 사고재해자 발생형태 — 부딪힘·끼임·깔림·뒤집힘·사업장내교통사고\n'
-                 '(2023~2025년 합산, K-NAVI 대응 대상 유형)', fontsize=12.5, pad=14)
-    ax.legend(loc='lower right', fontsize=10, framealpha=0.9)
-    ax.set_xlim(0, agg['total'].max() * 1.18)
+    ax.set_xlabel(
+        '사고재해자수 (명, 2023~2025년 합산)',
+        fontsize=11
+    )
 
-    fig.text(0.01, -0.03,
-              "출처: 고용노동부 산업재해현황(대업종별 발생형태) 2023~2025년 합산\n"
-              "※ 시인성을 위해 발생형태 25종 중 K-NAVI 대응 대상인 4개 유형만 표시",
-              fontsize=8, color='gray', ha='left')
+    ax.set_title(
+        '제조업·건설업·운수·창고·통신업의 사고재해 발생형태\n'
+        '(2023~2025년 합산, K-NAVI 대응 대상 유형)',
+        fontsize=12.5,
+        pad=14
+    )
+
+    ax.legend(
+        loc='lower right',
+        fontsize=10,
+        framealpha=0.9
+    )
+
+    ax.set_xlim(
+        0,
+        agg['total'].max() * 1.18
+    )
+
+    fig.text(
+        0.01,
+        -0.03,
+        "출처: 고용노동부 산업재해현황(대업종별 발생형태) 2023~2025년 합산\n"
+        "※ 제조업·건설업·운수·창고·통신업만 표시",
+        fontsize=8,
+        color='gray',
+        ha='left'
+    )
 
     plt.tight_layout()
-    out_path = os.path.join(OUT_DIR, '05_대업종별_사고재해자_발생형태.png')
-    plt.savefig(out_path, bbox_inches='tight', facecolor='white')
-    plt.close(fig)
-    print(f"저장됨: {out_path}")
 
+    out_path = os.path.join(
+        OUT_DIR,
+        '05_제조업_건설업_운수창고통신업_사고재해자_발생형태.png'
+    )
+
+    plt.savefig(
+        out_path,
+        bbox_inches='tight',
+        facecolor='white'
+    )
+
+    plt.close(fig)
+
+    print(f"저장됨: {out_path}")
 
 # ------------------------------------------------------------
 # 차트 4 (보너스): 전산업 재해정도 구성비 추이
@@ -337,12 +402,12 @@ def make_chart4_severity_trend(data):
 # ------------------------------------------------------------
 def make_chart5_target_share_trend(data):
     types = ['부딪힘', '끼임', '깔림.뒤집힘', '사업장내교통사고']
-    industries = ['건설업', '제조업', '운수·창고·통신업', '기타의사업']
+    industries = ['건설업', '제조업', '운수·창고·통신업']
     years = [2023, 2024, 2025]
     dfs = {2023: data['y23'], 2024: data['y24'], 2025: data['y25']}
 
-    colors = {'건설업': '#4C72B0', '제조업': '#DD8452',
-              '운수·창고·통신업': '#55A868', '기타의사업': '#8172B2'}
+    colors = {'건설업': "#C26A2F", '제조업': "#885DA5",
+              '운수·창고·통신업': '#55A868'}
 
     fig, ax = plt.subplots(figsize=(9, 6))
     for ind in industries:
