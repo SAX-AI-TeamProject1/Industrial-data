@@ -155,7 +155,7 @@ def make_chart1_robot_density_vs_accidents(data):
         if not np.isnan(v):
             ax2.text(x[i]+w/2, v+15, f'{int(v):,}', ha='center', fontsize=8, color='#DD8452')
 
-    ax1.set_title('로봇 투입(밀도) 증가 vs 산업재해자수 추이 (전산업 합계, 2018~2025)', fontsize=13, pad=15)
+    ax1.set_title('로봇 투입증가 vs 산업재해자수 추이 (전산업 합계)', fontsize=13, pad=15) # 제목 간략화
 
     lines1, labels1 = ax1.get_legend_handles_labels()
     lines2, labels2 = ax2.get_legend_handles_labels()
@@ -164,7 +164,7 @@ def make_chart1_robot_density_vs_accidents(data):
     fig.text(0.01, -0.03,
               f"출처: 고용노동부 산업재해현황(재해정도별) 2022~2025 / IFR World Robotics 2023~2025\n"
               f"※ 로봇밀도는 2018·2021·2023·2024년만 공개 수치가 존재(그 외 연도는 결측)",
-              fontsize=8, color='gray', ha='left')
+              fontsize=7, color='gray', ha='left')
 
     plt.tight_layout()
     out_path = os.path.join(OUT_DIR, '06_로봇_투입증가vs산업재해자수_추이.png')
@@ -234,7 +234,7 @@ def make_chart2_heatmap(data):
               "출처: 고용노동부 산업재해현황(재해정도별) 2022~2025 / IFR World Robotics 2023~2025\n"
               "※ 로봇밀도는 2018→2021→2023→2024년 계속 상승했지만, 총 재해자수·사망자수는 뚜렷한 하락 없이 등락을 반복\n"
               "  → 국가 단위 집계로는 로봇밀도 증가가 산업재해 감소로 뚜렷하게 이어진다고 보기 어려움",
-              fontsize=8.3, color='dimgray', ha='left')
+              fontsize=7, color='dimgray', ha='left')
 
     plt.tight_layout()
     out_path = os.path.join(OUT_DIR, '07_로봇밀도_증가vs산업재해_약한_상관관계.png')
@@ -306,9 +306,8 @@ def make_chart3_industry_hazard_types(data):
     )
 
     ax.set_title(
-        '제조업·건설업·운수·창고·통신업의 사고재해 발생형태\n'
-        '(2023~2025년 합산, K-NAVI 대응 대상 유형)',
-        fontsize=12.5,
+        '제조업·건설업·운수·창고·통신업의 사고재해 발생형태', # 제목 간략화, 폰트사이즈 변경
+        fontsize=15.5,
         pad=14
     )
 
@@ -328,7 +327,7 @@ def make_chart3_industry_hazard_types(data):
         -0.03,
         "출처: 고용노동부 산업재해현황(대업종별 발생형태) 2023~2025년 합산\n"
         "※ 제조업·건설업·운수·창고·통신업만 표시",
-        fontsize=8,
+        fontsize=7,
         color='gray',
         ha='left'
     )
@@ -387,7 +386,7 @@ def make_chart4_severity_trend(data):
         ax.text(x[i], 101, f"중대(6개월↑+사망) {severe:.1f}%", ha='center', fontsize=8.5, color='#a50f15')
 
     fig.text(0.01, -0.02, "출처: 고용노동부 산업재해현황(재해정도별) 2022~2025, 전산업 합계 기준",
-              fontsize=8, color='gray', ha='left')
+              fontsize=7, color='gray', ha='left')
 
     plt.tight_layout()
     out_path = os.path.join(OUT_DIR, '09_전산업_재해_치료기간_추이.png')
@@ -429,7 +428,7 @@ def make_chart5_target_share_trend(data):
     fig.text(0.01, -0.03,
               "출처: 고용노동부 산업재해현황(대업종별 발생형태) 2023~2025\n"
               "※ 비중(%) = (부딪힘+끼임+깔림·뒤집힘+사업장내교통사고) ÷ 해당 업종 전체 사고재해자수 × 100",
-              fontsize=8, color='gray', ha='left')
+              fontsize=7, color='gray', ha='left')
 
     plt.tight_layout()
     out_path = os.path.join(OUT_DIR, '08_업종별_대응유형_비중.png')
