@@ -4,9 +4,32 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "가상환경 생성",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "-m",
+                "venv",
+                ".venv"
+            ],
+            "windows": {
+                "command": "python",
+                "args": [
+                    "-m",
+                    "venv",
+                    ".venv"
+                ]
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
+        },
+        {
             "label": "필요 라이브러리 설치",
             "type": "shell",
-            "command": "python",
+            "command": "${workspaceFolder}/.venv/bin/python",
             "args": [
                 "-m",
                 "pip",
@@ -14,6 +37,13 @@
                 "-r",
                 "requirements.txt"
             ],
+            "windows": {
+                "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+            },
+            "dependsOn": [
+                "가상환경 생성"
+            ],
+            "dependsOrder": "sequence",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
