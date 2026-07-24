@@ -4,9 +4,32 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "필요 라이브러리 설치",
+            "label": "1. 가상환경 생성",
             "type": "shell",
-            "command": "python",
+            "command": "python3",
+            "args": [
+                "-m",
+                "venv",
+                ".venv"
+            ],
+            "windows": {
+                "command": "python",
+                "args": [
+                    "-m",
+                    "venv",
+                    ".venv"
+                ]
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "2. 필요 라이브러리 설치",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/python",
             "args": [
                 "-m",
                 "pip",
@@ -15,14 +38,12 @@
                 "requirements.txt"
             ],
             "windows": {
-                "command": "python"
+                "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
             },
-            "linux": {
-                "command": "python3"
-            },
-            "osx": {
-                "command": "python3"
-            },
+            "dependsOn": [
+                "1. 가상환경 생성"
+            ],
+            "dependsOrder": "sequence",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
