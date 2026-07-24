@@ -10,23 +10,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__)) # 환경설정 
-CANDIDATE_DIRS = [SCRIPT_DIR, os.path.join(SCRIPT_DIR, "..", "asset")] # asset 폴더 데이터만 이용 
+CANDIDATE_DIRS = [SCRIPT_DIR, os.path.join(SCRIPT_DIR, "..", "..", "asset")] # asset 폴더 데이터만 이용
 
 DATA_DIR = SCRIPT_DIR   # 아래 find_data_dir()에서 실제 값으로 갱신됨
 
 FORCE_DATA_DIR = None
 
-OUT_DIR = os.path.join(SCRIPT_DIR, '..' , "visualizations")  # 결과 이미지 저장 폴더
+OUT_DIR = os.path.join(SCRIPT_DIR, '..', '..', "visualizations")  # 결과 이미지 저장 폴더
 
 FILE_NAMES = {
-    "y23": "1차프로젝트-데이터 - 2023사고재해자.csv",
-    "y24": "1차프로젝트-데이터 - 2024사고재해자.csv",
-    "y25": "1차프로젝트-데이터 - 2025사고재해자.csv",
-    "sev22": "1차프로젝트-데이터 - 22_사고재해정도.csv",
-    "sev23": "1차프로젝트-데이터 - 23_사고재해정도.csv",
-    "sev24": "1차프로젝트-데이터 - 24_사고재해정도.csv",
-    "sev25": "1차프로젝트-데이터 - 25_사고재해정도.csv",
-    "robot": "1차프로젝트-데이터 - 로봇밀도.csv",
+    "y23": "기획_2023사고재해자.csv",
+    "y24": "기획_2024사고재해자.csv",
+    "y25": "기획_2025사고재해자.csv",
+    "sev22": "기획_22_사고재해정도.csv",
+    "sev23": "기획_23_사고재해정도.csv",
+    "sev24": "기획_24_사고재해정도.csv",
+    "sev25": "기획_25_사고재해정도.csv",
+    "robot": "기획_로봇밀도.csv",
 }
 
 SRC_INJURY = "출처: 고용노동부 산업재해현황(대업종별 발생형태) 2023~2025"

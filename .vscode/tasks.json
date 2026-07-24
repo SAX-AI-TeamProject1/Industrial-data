@@ -14,6 +14,15 @@
                 "-r",
                 "requirements.txt"
             ],
+            "windows": {
+                "command": "python"
+            },
+            "linux": {
+                "command": "python3"
+            },
+            "osx": {
+                "command": "python3"
+            },
             "problemMatcher": [],
             "group": {
                 "kind": "build",

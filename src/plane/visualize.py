@@ -15,14 +15,14 @@ else:
     plt.rcParams["font.family"] = "NanumGothic"
 plt.rcParams["axes.unicode_minus"] = False
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 CSV_DIR = BASE_DIR / "asset"
 OUT_DIR = BASE_DIR / "visualizations"
 OUT_DIR.mkdir(exist_ok=True)
 
 
 def plot_robot_density():
-    path = CSV_DIR / "1차프로젝트-데이터 - 로봇밀도.csv"
+    path = CSV_DIR / "기획_로봇밀도.csv"
     df = pd.read_csv(path, skiprows=3, thousands=",")
     df.columns = ["구분", "기준연도", "값", "단위", "비고", "출처"]
 
@@ -91,9 +91,9 @@ def main():
 
     victims = load_industry_matrix(
         [
-            CSV_DIR / "1차프로젝트-데이터 - 2023사고재해자.csv",
-            CSV_DIR / "1차프로젝트-데이터 - 2024사고재해자.csv",
-            CSV_DIR / "1차프로젝트-데이터 - 2025사고재해자.csv",
+            CSV_DIR / "기획_2023사고재해자.csv",
+            CSV_DIR / "기획_2024사고재해자.csv",
+            CSV_DIR / "기획_2025사고재해자.csv",
         ]
     )
     plot_heatmap(
@@ -104,9 +104,9 @@ def main():
 
     deaths = load_industry_matrix(
         [
-            CSV_DIR / "1차프로젝트-데이터 - 2023사고사망자.csv",
-            CSV_DIR / "1차프로젝트-데이터 - 2024사고사망자.csv",
-            CSV_DIR / "1차프로젝트-데이터 - 2025사고사망자.csv",
+            CSV_DIR / "기획_2023사고사망자.csv",
+            CSV_DIR / "기획_2024사고사망자.csv",
+            CSV_DIR / "기획_2025사고사망자.csv",
         ]
     )
     plot_heatmap(
@@ -117,10 +117,10 @@ def main():
 
     severity = load_industry_matrix(
         [
-            CSV_DIR / "1차프로젝트-데이터 - 22_사고재해정도.csv",
-            CSV_DIR / "1차프로젝트-데이터 - 23_사고재해정도.csv",
-            CSV_DIR / "1차프로젝트-데이터 - 24_사고재해정도.csv",
-            CSV_DIR / "1차프로젝트-데이터 - 25_사고재해정도.csv",
+            CSV_DIR / "기획_22_사고재해정도.csv",
+            CSV_DIR / "기획_23_사고재해정도.csv",
+            CSV_DIR / "기획_24_사고재해정도.csv",
+            CSV_DIR / "기획_25_사고재해정도.csv",
         ],
         drop_columns=("합계", "요양재해자"),
     )
