@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "가상환경 생성",
+            "label": "1. 가상환경 생성",
             "type": "shell",
             "command": "python3",
             "args": [
@@ -27,7 +27,7 @@
             }
         },
         {
-            "label": "필요 라이브러리 설치",
+            "label": "2. 필요 라이브러리 설치",
             "type": "shell",
             "command": "${workspaceFolder}/.venv/bin/python",
             "args": [
