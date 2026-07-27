@@ -54,5 +54,25 @@
                 "panel": "shared"
             }
         },
+        {
+            "label": "3. 비율검정 검증 재현",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/python",
+            "args": [
+                "src/origin/proportion_test.py"
+            ],
+            "windows": {
+                "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe"
+            },
+            "dependsOn": [
+                "2. 필요 라이브러리 설치"
+            ],
+            "dependsOrder": "sequence",
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
     ]
 }
