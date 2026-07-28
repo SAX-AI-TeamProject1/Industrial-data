@@ -110,8 +110,8 @@ def plot_fisher():
     ax.bar(xs, pmf, color=colors, width=0.9)
 
     ax.axvline(mean, color="#333333", ls="--", lw=1.3)
-    ax.annotate(f"H0 기대값 약 {mean:.1f}건", xy=(mean, stats.hypergeom.pmf(int(round(mean)), M, K, n)),
-                xytext=(mean + 3, pmf.max() * 0.85), fontsize=10,
+    ax.annotate(f"H0 기대값 약 {mean:.1f}건", xy=(mean, pmf.max() * 0.90),
+                xytext=(mean - 8.5, pmf.max() * 1.05), fontsize=10, ha="center",
                 arrowprops=dict(arrowstyle="->", color="#333333"))
     ax.annotate(f"관측 = {X2}건", xy=(X2, stats.hypergeom.pmf(X2, M, K, n)),
                 xytext=(X2 - 10.5, pmf.max() * 0.6), color=C_OBS, fontsize=11, fontweight="bold",
