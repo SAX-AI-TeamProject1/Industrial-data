@@ -74,5 +74,19 @@
                 "panel": "shared"
             }
         },
+        {
+            // R이 설치돼 있어야 함(Rscript가 PATH에 있어야 실행됨). 설치는 OS별로 별도 진행.
+            "label": "4. R 비율검정 검증 시각화",
+            "type": "shell",
+            "command": "Rscript",
+            "args": [
+                "${workspaceFolder}/visualizations/proportion_test_R/proportion_test_viz.R"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
     ]
 }

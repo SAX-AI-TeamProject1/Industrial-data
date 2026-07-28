@@ -42,3 +42,10 @@
 - 비어있던 src/origin/산업현황.py 삭제, AGENT.md의 관련 언급 제거.
 - 전국 근로자 수를 역산 추정값 576,000 → 논문 인용 기사 원자료의 확정값 **576,224명**으로 정정. proportion_test.py 상수·비율검정_분석문서.md 전 계산과정·10·11번 차트에 모두 반영하고 모듈 재실행으로 수치 일치 재확인(보정 전 z=1.023·p=0.153·OR=0.774·p=0.182, 결론 동일: 유의하지 않음). 상대감소율은 공표 재해율 기준 22.56% 유지.
 - .vscode/tasks.json에 "3. 비율검정 검증 재현" 태스크 추가(proportion_test.py 실행). dependsOn으로 가상환경 생성·라이브러리 설치를 먼저 거치도록 연결.
+
+# 2026.07.28 (한인혁)
+
+- 비율검정 검증 과정(Z-검정·Fisher 정확검정) 시각화 추가. visualizations/proportion_test_R/ 폴더 신설:
+  - proportion_test_viz.R (base R, 추가 패키지 불필요) + 동일 그림의 PNG 2개(Z검정 정규분포·기각역 / Fisher 초기하분포·p값).
+  - PNG는 R 미설치로 src/plane/visualize_proportion_test.py(matplotlib)로 생성. 통계값은 R의 dhyper/phyper/fisher.test와 동일 절차로 Python 검증(초기하 P(X<=16)=0.182 = Fisher p 일치).
+- .vscode/tasks.json에 "4. R 비율검정 검증 시각화" 태스크 추가(Rscript로 proportion_test_viz.R 실행). Rscript는 OS 공통 명령이라 분기 불필요하나 R이 설치돼 있어야 함(설치는 OS별 별도).
