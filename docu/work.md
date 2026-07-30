@@ -49,3 +49,10 @@
   - proportion_test_viz.R (base R, 추가 패키지 불필요) + 동일 그림의 PNG 2개(Z검정 정규분포·기각역 / Fisher 초기하분포·p값).
   - PNG는 R 미설치로 src/plane/visualize_proportion_test.py(matplotlib)로 생성. 통계값은 R의 dhyper/phyper/fisher.test와 동일 절차로 Python 검증(초기하 P(X<=16)=0.182 = Fisher p 일치).
 - .vscode/tasks.json에 "4. R 비율검정 검증 시각화" 태스크 추가(Rscript로 proportion_test_viz.R 실행). Rscript는 OS 공통 명령이라 분기 불필요하나 R이 설치돼 있어야 함(설치는 OS별 별도).
+
+# 2026.07.29 (한인혁)
+
+- Fisher 초기하분포 차트: 우측 상단 설명 박스가 "H0 기대값" 라벨을 가리던 문제 수정(라벨을 봉우리 위 상단 중앙으로 이동).
+- 발표자료 .pptx 생성. src/report/build_pptx.py(python-pptx) 신규 + report/스마트안전장비_도입효과_분석.pptx 산출(11장, 16:9, 한국어).
+  - 표지/배경·목표/근거데이터/도입효과 차트 2장/검증방법/Z·Fisher 시각화 2장/종합결과 표/결론/한계 구성. 차트 PNG 4개 삽입, 재생성 후 재검증(슬라이드 11·이미지 4).
+  - requirements.txt에 python-pptx 추가.
