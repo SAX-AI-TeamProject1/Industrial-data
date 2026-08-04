@@ -106,12 +106,26 @@ def plot_fisher():
     p_value = stats.hypergeom.cdf(X2, M, K, n)      # P(X <= 16) = Fisher(단측)
     odds_ratio, _ = stats.fisher_exact([[X2, N2 - X2], [X1, N1 - X1]], alternative="less")
 
-    colors = [C_TAIL if xi <= X2 else C_BASE for xi in xs]
+    # 단측 α=0.05 기각역: P(X <= crit_k) <= 0.05 인 가장 큰 k
+    crit_k = max(k for k in xs if stats.hypergeom.cdf(k, M, K, n) <= 0.05)
+
+    def bar_color(xi):
+        if xi <= crit_k:
+            return C_REJECT   # 기각역 (X <= 임계값)
+        if xi <= X2:
+            return C_TAIL     # 관측 이하 = p-value 영역
+        return C_BASE
+    colors = [bar_color(xi) for xi in xs]
+
     fig, ax = plt.subplots(figsize=(9, 5.5))
     ax.bar(xs, pmf, color=colors, width=0.9)
 
     ax.set_ylim(0, pmf.max() * 1.28)
     ax.axvline(mean, color="#333333", ls="--", lw=1.5)
+    ax.axvline(crit_k + 0.5, color=C_REJECT, ls="--", lw=1.8)
+    ax.text(crit_k + 0.2, pmf.max() * 0.78,
+            f"임계값 {crit_k}건\n(기각역: X ≤ {crit_k}, α=0.05)",
+            color=C_REJECT, fontsize=12, fontweight="bold", ha="right", va="center")
     ax.annotate(f"H0 기대값 약 {mean:.1f}건", xy=(mean, pmf.max() * 0.97),
                 xytext=(mean - 9.5, pmf.max() * 1.13), fontsize=13, fontweight="bold", ha="center",
                 arrowprops=dict(arrowstyle="->", color="#333333"))
@@ -120,11 +134,11 @@ def plot_fisher():
                 arrowprops=dict(arrowstyle="->", color=C_OBS))
 
     ax.text(0.98, 0.97,
-            f"주황 영역 = P(X ≤ {X2}) = {p_value:.3f}\n"
-            f"= Fisher 단측 p-value\n"
-            f"오즈비(OR) = {odds_ratio:.3f}\n"
-            f"→ p > 0.05, 통계적으로 유의하지 않음",
-            transform=ax.transAxes, va="top", ha="right", fontsize=13.5, fontweight="bold",
+            f"빨강+주황 = P(X ≤ {X2}) = {p_value:.3f} = Fisher p\n"
+            f"기각역(빨강) = X ≤ {crit_k}  (α=0.05)\n"
+            f"관측 {X2} > 임계 {crit_k} → 기각역 밖\n"
+            f"OR = {odds_ratio:.3f} → 유의하지 않음",
+            transform=ax.transAxes, va="top", ha="right", fontsize=13, fontweight="bold",
             bbox=dict(boxstyle="round", facecolor="#F5F5F5", edgecolor="#CCCCCC"))
 
     ax.set_title("Fisher 정확검정 — 귀무가설 하 도입현장 사고건수 분포 (초기하분포)",
