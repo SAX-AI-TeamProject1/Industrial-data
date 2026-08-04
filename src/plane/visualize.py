@@ -32,12 +32,14 @@ def plot_robot_density():
 
     fig, ax = plt.subplots(figsize=(7, 5))
     bars = ax.bar(density["기준연도"].astype(str), density["값"], color="#4C72B0")
-    ax.bar_label(bars, padding=3)
-    ax.set_title("연도별 로봇밀도 (종업원 1만 명당 가동대수)")
-    ax.set_xlabel("연도")
-    ax.set_ylabel("로봇밀도 (대)")
+    ax.bar_label(bars, padding=3, fontsize=15, fontweight="bold")
+    ax.set_title("연도별 로봇밀도 (종업원 1만 명당 가동대수)", fontsize=16, fontweight="bold")
+    ax.set_xlabel("연도", fontsize=14, fontweight="bold")
+    ax.set_ylabel("로봇밀도 (대)", fontsize=14, fontweight="bold")
+    ax.tick_params(axis="both", labelsize=13)
+    plt.setp(ax.get_xticklabels(), fontweight="bold")
     fig.tight_layout()
-    fig.savefig(OUT_DIR / "01_로봇밀도_연도별.png", dpi=150)
+    fig.savefig(OUT_DIR / "01_로봇밀도_연도별.png", dpi=200)
     plt.close(fig)
 
 

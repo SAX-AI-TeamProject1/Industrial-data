@@ -65,31 +65,32 @@ def plot_ztest():
     ax.axvline(z, color=C_OBS, lw=2.2)
 
     ax.annotate(f"관측 z = {z:.3f}", xy=(z, stats.norm.pdf(z)),
-                xytext=(z - 1.7, 0.33), color=C_OBS, fontsize=11, fontweight="bold",
+                xytext=(z - 1.9, 0.33), color=C_OBS, fontsize=15, fontweight="bold",
                 arrowprops=dict(arrowstyle="->", color=C_OBS))
     ax.annotate(f"임계값 {crit:.3f}\n(단측 α=0.05)", xy=(crit, 0.06),
-                xytext=(crit + 0.35, 0.16), color=C_REJECT, fontsize=10,
+                xytext=(crit + 0.35, 0.16), color=C_REJECT, fontsize=13, fontweight="bold",
                 arrowprops=dict(arrowstyle="->", color=C_REJECT))
-    ax.text(2.15, 0.028, "기각역", color=C_REJECT, fontsize=10, ha="center")
+    ax.text(2.25, 0.024, "기각역", color=C_REJECT, fontsize=14, fontweight="bold", ha="center")
 
-    ax.text(0.02, 0.97,
+    ax.text(0.015, 0.97,
             f"단측 p-value = {p_value:.3f} > 0.05\n"
-            f"→ 관측 z가 임계값에 못 미침 (기각역 밖)\n"
-            f"→ 귀무가설 기각 못 함 = 통계적으로 유의하지 않음",
-            transform=ax.transAxes, va="top", fontsize=10.5,
+            f"관측 z={z:.3f} < 임계값 {crit:.3f}\n"
+            f"→ 유의하지 않음",
+            transform=ax.transAxes, va="top", fontsize=13, fontweight="bold",
             bbox=dict(boxstyle="round", facecolor="#F5F5F5", edgecolor="#CCCCCC"))
 
-    ax.set_title("2표본 비율 Z-검정 (단측, H1: 도입현장 재해율 < 전국)", fontsize=13, pad=12)
-    ax.set_xlabel("표준정규분포 Z")
-    ax.set_ylabel("확률밀도")
+    ax.set_title("2표본 비율 Z-검정 (단측, H1: 도입현장 재해율 < 전국)", fontsize=16, fontweight="bold", pad=12)
+    ax.set_xlabel("표준정규분포 Z", fontsize=14, fontweight="bold")
+    ax.set_ylabel("확률밀도", fontsize=14, fontweight="bold")
     ax.set_ylim(0, 0.44)
+    ax.tick_params(axis="both", labelsize=12)
     ax.spines[["top", "right"]].set_visible(False)
 
     fig.text(0.01, -0.02,
              "출처: 류정·박인선(2025), Crisisonomy 21(6) / News1(2024) · 주황=관측 z 꼬리(p), 빨강=기각역",
-             fontsize=8, color="gray", ha="left")
+             fontsize=10, color="gray", ha="left")
     fig.tight_layout()
-    fig.savefig(OUT_DIR / "01_Z검정_정규분포_기각역.png", dpi=150, bbox_inches="tight")
+    fig.savefig(OUT_DIR / "01_Z검정_정규분포_기각역.png", dpi=200, bbox_inches="tight")
     plt.close(fig)
 
 
@@ -109,12 +110,13 @@ def plot_fisher():
     fig, ax = plt.subplots(figsize=(9, 5.5))
     ax.bar(xs, pmf, color=colors, width=0.9)
 
-    ax.axvline(mean, color="#333333", ls="--", lw=1.3)
-    ax.annotate(f"H0 기대값 약 {mean:.1f}건", xy=(mean, pmf.max() * 0.90),
-                xytext=(mean - 8.5, pmf.max() * 1.05), fontsize=10, ha="center",
+    ax.set_ylim(0, pmf.max() * 1.28)
+    ax.axvline(mean, color="#333333", ls="--", lw=1.5)
+    ax.annotate(f"H0 기대값 약 {mean:.1f}건", xy=(mean, pmf.max() * 0.97),
+                xytext=(mean - 9.5, pmf.max() * 1.13), fontsize=13, fontweight="bold", ha="center",
                 arrowprops=dict(arrowstyle="->", color="#333333"))
     ax.annotate(f"관측 = {X2}건", xy=(X2, stats.hypergeom.pmf(X2, M, K, n)),
-                xytext=(X2 - 10.5, pmf.max() * 0.6), color=C_OBS, fontsize=11, fontweight="bold",
+                xytext=(X2 - 11.5, pmf.max() * 0.6), color=C_OBS, fontsize=15, fontweight="bold",
                 arrowprops=dict(arrowstyle="->", color=C_OBS))
 
     ax.text(0.98, 0.97,
@@ -122,21 +124,22 @@ def plot_fisher():
             f"= Fisher 단측 p-value\n"
             f"오즈비(OR) = {odds_ratio:.3f}\n"
             f"→ p > 0.05, 통계적으로 유의하지 않음",
-            transform=ax.transAxes, va="top", ha="right", fontsize=10.5,
+            transform=ax.transAxes, va="top", ha="right", fontsize=13.5, fontweight="bold",
             bbox=dict(boxstyle="round", facecolor="#F5F5F5", edgecolor="#CCCCCC"))
 
     ax.set_title("Fisher 정확검정 — 귀무가설 하 도입현장 사고건수 분포 (초기하분포)",
-                 fontsize=13, pad=12)
-    ax.set_xlabel("도입현장(4,481명)에서의 사고 건수")
-    ax.set_ylabel("확률")
+                 fontsize=16, fontweight="bold", pad=12)
+    ax.set_xlabel("도입현장(4,481명)에서의 사고 건수", fontsize=14, fontweight="bold")
+    ax.set_ylabel("확률", fontsize=14, fontweight="bold")
+    ax.tick_params(axis="both", labelsize=12)
     ax.spines[["top", "right"]].set_visible(False)
 
     fig.text(0.01, -0.02,
              "출처: 류정·박인선(2025), Crisisonomy 21(6) / News1(2024) · "
              "H0: 도입 여부와 사고가 무관 → 초기하분포",
-             fontsize=8, color="gray", ha="left")
+             fontsize=10, color="gray", ha="left")
     fig.tight_layout()
-    fig.savefig(OUT_DIR / "02_Fisher_초기하분포_p값.png", dpi=150, bbox_inches="tight")
+    fig.savefig(OUT_DIR / "02_Fisher_초기하분포_p값.png", dpi=200, bbox_inches="tight")
     plt.close(fig)
 
 

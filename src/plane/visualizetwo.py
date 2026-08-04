@@ -297,25 +297,31 @@ def make_chart3_industry_hazard_types(data):
             i,
             f"{int(row['total']):,}명",
             va='center',
-            fontsize=9
+            fontsize=15,
+            fontweight='bold'
         )
 
     ax.set_xlabel(
         '사고재해자수 (명, 2023~2025년 합산)',
-        fontsize=11
+        fontsize=15,
+        fontweight='bold'
     )
 
     ax.set_title(
         '제조업·건설업·운수·창고·통신업의 사고재해 발생형태', # 제목 간략화, 폰트사이즈 변경
-        fontsize=15.5,
+        fontsize=19,
+        fontweight='bold',
         pad=14
     )
 
     ax.legend(
         loc='lower right',
-        fontsize=10,
+        fontsize=14,
         framealpha=0.9
     )
+
+    ax.tick_params(axis='both', labelsize=13)
+    plt.setp(ax.get_yticklabels(), fontweight='bold')
 
     ax.set_xlim(
         0,
@@ -327,7 +333,7 @@ def make_chart3_industry_hazard_types(data):
         -0.03,
         "출처: 고용노동부 산업재해현황(대업종별 발생형태) 2023~2025년 합산\n"
         "※ 제조업·건설업·운수·창고·통신업만 표시",
-        fontsize=7,
+        fontsize=10,
         color='gray',
         ha='left'
     )
@@ -341,6 +347,7 @@ def make_chart3_industry_hazard_types(data):
 
     plt.savefig(
         out_path,
+        dpi=200,
         bbox_inches='tight',
         facecolor='white'
     )
