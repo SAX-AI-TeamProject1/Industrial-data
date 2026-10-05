@@ -10,7 +10,7 @@
 ![matplotlib](https://img.shields.io/badge/matplotlib-11557C)
 ![R](https://img.shields.io/badge/R-base-276DC3?logo=r&logoColor=white)
 
-[K-NAVI 조직](https://github.com/SAX-AI-TeamProject1) · [▶ K-NAVI 데모 영상](https://youtu.be/uNY5pw-5RxQ) · [분석 문서](./docu/비율검정_분석문서.md) · [발표 자료](./report/스마트안전장비_도입효과_분석.pptx)
+[K-NAVI 조직](https://github.com/SAX-AI-TeamProject1) · [분석 문서](./docu/비율검정_분석문서.md) · [발표 자료](./report/스마트안전장비_도입효과_분석.pptx)
 
 <img src="./visualizations/10_스마트안전장비_지원현장_사고재해율_비교.png" alt="스마트 안전장비 지원현장 사고재해율 비교" width="80%"/>
 
